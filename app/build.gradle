@@ -57,4 +57,5 @@ dependencies {
 
     //Firebase
     implementation 'com.firebaseui:firebase-ui-auth:6.2.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
