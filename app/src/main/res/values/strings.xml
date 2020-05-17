@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Read, Watch, Play</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">Watch Tracker</string>
+    <string name="title_home">Browse</string>
+    <string name="title_watched">Watched</string>
+    <string name="title_to_watch">To watch</string>
+    <string name="title_logout">Logout</string>
 </resources>

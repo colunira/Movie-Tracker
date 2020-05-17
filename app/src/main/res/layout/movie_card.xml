@@ -13,6 +13,28 @@
         android:orientation="vertical">
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/watched_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button"
+                app:srcCompat="@drawable/ic_done_18dp" />
+
+            <ImageButton
+                android:id="@+id/to_watch_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button"
+                app:srcCompat="@drawable/ic__eye_18dp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,8 +45,9 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/fui_ic_check_circle_black_128dp" />
+                android:layout_height="108dp"
+                android:layout_marginVertical="10dp"
+                app:srcCompat="@drawable/ic_clapper" />
 
             <TextView
                 android:id="@+id/product_title"
@@ -40,5 +63,6 @@
                 android:text="Desc"
                 android:textAppearance="?attr/textAppearanceBody2" />
         </LinearLayout>
+
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

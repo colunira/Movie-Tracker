@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.readwatchplay.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="com.example.readwatchplay.ui.watched.WatchedFragment"
+        android:label="@string/title_watched"
+        tools:layout="@layout/fragment_watched" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.readwatchplay.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_to_watch"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
