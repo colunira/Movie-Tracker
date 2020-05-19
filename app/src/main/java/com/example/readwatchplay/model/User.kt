@@ -1,7 +1,7 @@
 package com.example.readwatchplay.model
 
 import com.google.firebase.auth.FirebaseAuth
-
+import kotlinx.android.parcel.Parcelize
 
 class User {
 
