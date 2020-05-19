@@ -12,6 +12,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.readwatchplay.model.User
+import com.example.readwatchplay.ui.loading.LoadingFragmentDirections
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
@@ -80,7 +82,8 @@ class MainActivity : AppCompatActivity() {
             val response = IdpResponse.fromResultIntent(data)
 
             if (resultCode == Activity.RESULT_OK) {
-                val user = FirebaseAuth.getInstance().currentUser
+                val user = FirebaseAuth.getInstance().currentUser!!
+                findNavController(R.id.nav_host_fragment).navigate(LoadingFragmentDirections.actionLoadingFragmentToNavigationHome())
             } else {
                 // Sign in failed.
                 //TODO: handle errors

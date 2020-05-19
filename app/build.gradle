@@ -67,4 +67,7 @@ dependencies {
 
     //Style changer
     implementation 'com.airbnb.android:paris:1.4.0'
+
+    // Gif image
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
 }

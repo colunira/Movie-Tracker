@@ -1,4 +1,4 @@
-package com.example.readwatchplay.ui.home
+package com.example.readwatchplay.ui.itemcard
 
 import android.graphics.Rect
 import android.view.View

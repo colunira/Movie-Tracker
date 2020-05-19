@@ -1,7 +1,5 @@
-package com.example.readwatchplay.ui.home
+package com.example.readwatchplay.ui.itemcard
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +12,6 @@ import com.airbnb.paris.extensions.style
 import com.example.readwatchplay.R
 import com.example.readwatchplay.model.Movie
 import com.example.readwatchplay.ui.MainViewModel
-import com.example.readwatchplay.ui.watched.WatchedFragment
 
 class ItemCardRecyclerViewAdapter(
     private val movies: List<Movie>,
@@ -28,7 +25,9 @@ class ItemCardRecyclerViewAdapter(
         val layoutView = LayoutInflater.from(parent.context).inflate(R.layout.movie_card, parent, false)
         mainViewModel =
             ViewModelProviders.of(context).get(MainViewModel::class.java)
-        return ItemCardViewHolder(layoutView)
+        return ItemCardViewHolder(
+            layoutView
+        )
     }
 
     override fun onBindViewHolder(holder: ItemCardViewHolder, position: Int) {

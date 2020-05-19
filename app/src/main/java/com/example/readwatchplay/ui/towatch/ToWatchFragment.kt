@@ -1,4 +1,4 @@
-package com.example.readwatchplay.ui.notifications
+package com.example.readwatchplay.ui.towatch
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.readwatchplay.R
 
-class NotificationsFragment : Fragment() {
+class ToWatchFragment : Fragment() {
 
     private lateinit var notificationsViewModel: NotificationsViewModel
 

@@ -1,4 +1,4 @@
-package com.example.readwatchplay.ui.notifications
+package com.example.readwatchplay.ui.towatch
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

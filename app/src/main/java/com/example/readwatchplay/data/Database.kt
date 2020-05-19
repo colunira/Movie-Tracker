@@ -4,16 +4,18 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.readwatchplay.model.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import kotlinx.coroutines.delay
 
 
 class Database {
 
-    companion object {
-        val database = FirebaseDatabase.getInstance().reference
-        val currentUser = User()
-        val watchesMoviesPath = database.child("users").child(currentUser.info!!.uid).child("watched")
-    }
+    val database = FirebaseDatabase.getInstance().reference
+    val currentUser = User()
+    val watchesMoviesPath = database.child("users").child(currentUser.info!!.uid).child("watched")
+
 
     fun addMovieToWatched(movieId: Int) {
         watchesMoviesPath.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -29,7 +31,6 @@ class Database {
             override fun onCancelled(error: DatabaseError) {
             }
         })
-
     }
 
     fun removeMovieFromWatched(movieId: Int) {
