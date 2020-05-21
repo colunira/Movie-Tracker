@@ -20,7 +20,7 @@ class Remote {
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
         .build()
     private val imagesAPI = imagesRetrofit.create(ImagesAPI::class.java)
-    private val key = "b244159971192fd00e91cb80a6982d42"
+    private val key = ""
 
     fun getMovieDetails(id: Int): LiveData<Movie> {
         val movieDetails = MutableLiveData<Movie>()
