@@ -4,28 +4,26 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.readwatchplay.model.User
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import kotlinx.coroutines.delay
 
 
 class Database {
 
     val database = FirebaseDatabase.getInstance().reference
     val currentUser = User()
-    val watchesMoviesPath = database.child("users").child(currentUser.info!!.uid).child("watched")
+    val watchedMoviesPath = database.child("users").child(currentUser.info!!.uid).child("watched")
+    val toWatchMoviesPath = database.child("users").child(currentUser.info!!.uid).child("toWatch")
 
 
     fun addMovieToWatched(movieId: Int) {
-        watchesMoviesPath.addListenerForSingleValueEvent(object : ValueEventListener {
+        watchedMoviesPath.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 var movieIdList = dataSnapshot.value as? MutableList<Int>
                 if (movieIdList.isNullOrEmpty()) {
                     movieIdList = mutableListOf()
                 }
                 movieIdList.add(movieId)
-                watchesMoviesPath.setValue(movieIdList)
+                watchedMoviesPath.setValue(movieIdList)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -34,15 +32,15 @@ class Database {
     }
 
     fun removeMovieFromWatched(movieId: Int) {
-        watchesMoviesPath.addListenerForSingleValueEvent(object : ValueEventListener {
+        watchedMoviesPath.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val movieIdList = mutableListOf<Int?>()
+                var key = ""
                 for (row in dataSnapshot.children) {
-                    val id = row.getValue(Int::class.java)
-                    movieIdList.add(id)
+                    if (row.value.toString() == movieId.toString()) {
+                        key = row.key!!
+                    }
                 }
-                val id = movieIdList.indexOf(movieId)
-                watchesMoviesPath.child(id.toString()).removeValue()
+                watchedMoviesPath.child(key).removeValue()
             }
             override fun onCancelled(error: DatabaseError) {
                 Log.v("error", error.toString())
@@ -50,10 +48,10 @@ class Database {
         })
     }
 
-    fun getWatchedIds(): LiveData<List<Int>> {
+    fun getWatchedMoviesIds(): LiveData<List<Int>> {
         val movies = MutableLiveData<List<Int>>()
 
-        watchesMoviesPath.addListenerForSingleValueEvent(object : ValueEventListener {
+        watchedMoviesPath.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val movieIdList = mutableListOf<Int?>()
                 for (row in dataSnapshot.children) {
@@ -69,6 +67,55 @@ class Database {
         return movies
     }
 
+    fun addMovieToToWatch(movieId: Int) {
+        toWatchMoviesPath.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var movieIdList = dataSnapshot.value as? MutableList<Int>
+                if (movieIdList.isNullOrEmpty()) {
+                    movieIdList = mutableListOf()
+                }
+                movieIdList.add(movieId)
+                toWatchMoviesPath.setValue(movieIdList)
+            }
 
-    //TODO: duplicate the functionality for "to watch"
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+    fun removeMovieFromToWatch(movieId: Int) {
+        toWatchMoviesPath.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var key = ""
+                for (row in dataSnapshot.children) {
+                    if (row.value.toString() == movieId.toString()) {
+                        key = row.key!!
+                    }
+                }
+                toWatchMoviesPath.child(key).removeValue()
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Log.v("error", error.toString())
+            }
+        })
+    }
+
+    fun getToWatchMoviesIds(): LiveData<List<Int>> {
+        val movies = MutableLiveData<List<Int>>()
+
+        toWatchMoviesPath.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val movieIdList = mutableListOf<Int?>()
+                for (row in dataSnapshot.children) {
+                    val id = row.getValue(Int::class.java)
+                    movieIdList.add(id)
+                }
+                movies.value = movieIdList.filterNotNull()
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
+        return movies
+    }
 }

@@ -22,4 +22,10 @@ class MainViewModel : ViewModel() {
     fun addMovieToWatched(movieId: Int) = repository.addMovieToWatched(movieId)
 
     fun removeMovieFromWatched(movieId: Int) = repository.removeMovieFromWatched(movieId)
+
+    fun getToWatchMoviesIds(): LiveData<List<Int>> = repository.getToWatchMoviesIds()
+
+    fun addMovieToToWatch(movieId: Int) = repository.addMovieToToWatch(movieId)
+
+    fun removeMovieFromToWatch(movieId: Int) = repository.removeMovieFromToWatch(movieId)
 }

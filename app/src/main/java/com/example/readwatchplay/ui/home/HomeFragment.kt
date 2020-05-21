@@ -38,15 +38,18 @@ class HomeFragment : Fragment() {
         // Set up the RecyclerView
 
         mainViewModel.getTrendingMovies().observe(viewLifecycleOwner, Observer { movies ->
-            mainViewModel.getWatchedMoviesIds().observe(viewLifecycleOwner, Observer { ids ->
-                view.recycler_view.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
-                val adapter =
-                    ItemCardRecyclerViewAdapter(
-                        movies,
-                        ids,
-                        this
-                    )
-                view.recycler_view.adapter = adapter
+            mainViewModel.getWatchedMoviesIds().observe(viewLifecycleOwner, Observer { watchedIds ->
+                mainViewModel.getToWatchMoviesIds().observe(viewLifecycleOwner, Observer { toWatchIds ->
+                    view.recycler_view.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
+                    val adapter =
+                        ItemCardRecyclerViewAdapter(
+                            movies,
+                            watchedIds.toMutableList(),
+                            toWatchIds.toMutableList(),
+                            this
+                        )
+                    view.recycler_view.adapter = adapter
+                })
             })
         })
         view.recycler_view.setHasFixedSize(true)

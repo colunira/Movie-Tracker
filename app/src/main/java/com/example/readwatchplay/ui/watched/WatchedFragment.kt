@@ -42,7 +42,8 @@ class WatchedFragment : Fragment() {
                 val adapter =
                     ItemCardRecyclerViewAdapter(
                         movies,
-                        ids,
+                        ids.toMutableList(),
+                        mutableListOf(),
                         this
                     )
                 view.watched_recycler_view.adapter = adapter
